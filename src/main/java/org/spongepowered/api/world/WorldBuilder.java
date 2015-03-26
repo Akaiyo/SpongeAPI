@@ -74,7 +74,7 @@ public interface WorldBuilder {
      * @param type The type
      * @return The builder, for chaining
      */
-    WorldBuilder dimension(DimensionType type);
+    WorldBuilder dimensionType(DimensionType type);
 
     /**
      * Sets whether this world should generate map features such as villages and
@@ -94,7 +94,7 @@ public interface WorldBuilder {
      * @return The builder, for chaining
      */
     WorldBuilder hardcore(boolean enabled);
-    
+
     /**
      * Sets any extra settings required by the {@link GeneratorType}. If not
      * specified these will default to the settings within
@@ -106,13 +106,6 @@ public interface WorldBuilder {
     WorldBuilder settings(DataContainer settings);
 
     /**
-     * Resets this builder.
-     * 
-     * @return The builder
-     */
-    WorldBuilder reset();
-
-    /**
      * Attempts to create a {@link World} from the specified parameters.
      * 
      * @return The world
@@ -121,7 +114,8 @@ public interface WorldBuilder {
     World build() throws IllegalStateException;
 
     /**
-     * Attempts to create a {@link WorldCreationSettings} which may be later used to create a world.
+     * Attempts to create a {@link WorldCreationSettings} which may be later
+     * used to create a world.
      * 
      * @return The world settings
      * @throws IllegalStateException If any required parameters are missing

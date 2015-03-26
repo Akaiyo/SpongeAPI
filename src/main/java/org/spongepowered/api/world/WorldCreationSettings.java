@@ -89,14 +89,14 @@ public interface WorldCreationSettings {
      * @return Should create bonus chest
      */
     boolean bonusChestEnabled();
-    
+
     /**
      * Gets the dimension type for the world.
      * 
      * @return The dimension type
      */
-    DimensionType getDimension();
-    
+    DimensionType getDimensionType();
+
     /**
      * Gets a {@link DataContainer} of any extra settings required by the
      * generator.

@@ -93,8 +93,6 @@ import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.Callable;
 
-import javax.annotation.Nullable;
-
 /**
  * Provides an easy way to retrieve types from a {@link Game}.
  *

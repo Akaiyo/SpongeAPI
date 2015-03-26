@@ -90,7 +90,7 @@ public interface Server extends ChannelRegistrar {
      * @return A collection of world properties
      */
     Collection<WorldProperties> getUnloadedWorlds();
-    
+
     /**
      * Gets the properties of all worlds, loaded or otherwise.
      * 
@@ -99,7 +99,8 @@ public interface Server extends ChannelRegistrar {
     Collection<WorldProperties> getAllWorldProperties();
 
     /**
-     * Gets a loaded {@link World} by its unique id ({@link UUID}), if it exists.
+     * Gets a loaded {@link World} by its unique id ({@link UUID}), if it
+     * exists.
      *
      * @param uniqueId UUID to lookup
      * @return The world, if found
@@ -198,16 +199,6 @@ public interface Server extends ChannelRegistrar {
      * @return Whether or now the world was successfully created
      */
     boolean createWorld(WorldCreationSettings settings);
-
-    /**
-     * Creates and loads a new world from the given
-     * {@link WorldCreationSettings}. For the creation of the
-     * WorldCreationSettings please see {@link GameRegistry#getWorldBuilder()}.
-     * 
-     * @param settings The settings for creation
-     * @return The world data
-     */
-    World createAndLoadWorld(WorldCreationSettings settings);
 
     /**
      * Gets the time, in ticks, since this server began running for the current session.

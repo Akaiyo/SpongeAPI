@@ -39,6 +39,7 @@ import org.spongepowered.api.world.WorldBorder;
 import org.spongepowered.api.world.difficulty.Difficulty;
 
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Represents the WorldProperties which are persisted across runtime instances.
@@ -72,6 +73,27 @@ public interface WorldProperties extends DataSerializable {
      * @param state The new state
      */
     void setEnabled(boolean state);
+
+    /**
+     * Gets the name of this world.
+     * 
+     * @return The name
+     */
+    String getWorldName();
+
+    /**
+     * Sets the name of this world.
+     * 
+     * @param name The name
+     */
+    void setWorldName(String name);
+
+    /**
+     * Gets the UUID of the world.
+     * 
+     * @return The UUID
+     */
+    UUID getUUID();
 
     /**
      * Gets the default spawn position of this world.
@@ -140,40 +162,28 @@ public interface WorldProperties extends DataSerializable {
      */
     void setWorldTime(long time);
 
-    /**
-     * Gets the Unix time stamp of when this world was last loaded.
+    /*
+     * TODO pending decision on handling client only API
+     * 
+     * Gets the Unix time stamp of when this world was last played on.
      * 
      * @return The time this world was last loaded
      */
-    long getLastTimePlayed();
+    // long getLastTimePlayed();
 
     /**
      * Gets the {@link DimensionType} of this world.
      * 
      * @return The dimension type
      */
-    DimensionType getDimension();
+    DimensionType getDimensionType();
 
     /**
      * Sets the {@link DimensionType} of this world.
      * 
      * @param type The dimension type
      */
-    void setDimension(DimensionType type);
-
-    /**
-     * Gets the name of this world.
-     * 
-     * @return The name
-     */
-    String getWorldName();
-
-    /**
-     * Sets the name of this world.
-     * 
-     * @param name The name
-     */
-    void setWorldName(String name);
+    void setDimensionType(DimensionType type);
 
     /**
      * Gets whether this world is currently experiencing rain/snow/cloud-cover
@@ -189,7 +199,7 @@ public interface WorldProperties extends DataSerializable {
      * 
      * @param state Is raining
      */
-    void isRaining(boolean state);
+    void setRaining(boolean state);
 
     /**
      * Gets the number of ticks until the weather is next toggled to a new
@@ -205,7 +215,7 @@ public interface WorldProperties extends DataSerializable {
      * 
      * @param time The time until the weather changes
      */
-    void getRainTime(int time);
+    void setRainTime(int time);
 
     /**
      * Gets whether this world is currently experiencing a lightning storm.
@@ -295,7 +305,7 @@ public interface WorldProperties extends DataSerializable {
      * 
      * @param state Whether commands are allowed
      */
-    void areCommandsAllowed(boolean state);
+    void setCommandsAllowed(boolean state);
 
     /**
      * Gets whether this world has been initialized.
