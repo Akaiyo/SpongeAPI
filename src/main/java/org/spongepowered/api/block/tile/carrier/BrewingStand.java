@@ -34,7 +34,7 @@ public interface BrewingStand extends TileEntityCarrier {
 
     /**
      /**
-     * Gets the current {@link BrewingData} of this {@link BrewingStand}.
+     * Gets a copy of the current {@link BrewingData}.
      *
      * <p>Note that as time goes on, the {@link BrewingData} may not remain in
      * sync with the {@link BrewingStand} tile entity. It is advisable that a

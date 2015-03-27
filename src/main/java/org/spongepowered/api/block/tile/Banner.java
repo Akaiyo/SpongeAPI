@@ -32,7 +32,7 @@ import org.spongepowered.api.block.tile.data.BannerData;
 public interface Banner extends TileEntity {
 
     /**
-     * Gets the data that this {@link Banner} is displaying.
+     * Gets a copy of the current {@link BannerData}.
      *
      * @return The current banner data
      */

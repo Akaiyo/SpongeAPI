@@ -46,7 +46,7 @@ import javax.annotation.Nullable;
 public interface TileEntityCarrier extends TileEntity, Carrier {
 
     /**
-     * Gets the current {@link LockableData} for this carrier.
+     * Gets a copy of the current {@link LockableData} for this carrier.
      *
      * <p>{@link LockableData} represents that this {@link TileEntityCarrier}
      * may be opened only by a matching lock token. The {@link LockableData}
@@ -70,7 +70,7 @@ public interface TileEntityCarrier extends TileEntity, Carrier {
     TileDataTransactionResult setLockableData(@Nullable LockableData data);
 
     /**
-     * Gets the current {@link NameableData} for this carrier.
+     * Gets a copy of the current {@link NameableData} for this carrier.
      *
      * <p>{@link NameableData} represents that this {@link TileEntityCarrier}
      * may have an alternate name displayed when used by a player or in chat.

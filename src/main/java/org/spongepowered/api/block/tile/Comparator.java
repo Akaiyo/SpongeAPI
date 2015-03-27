@@ -32,7 +32,7 @@ import org.spongepowered.api.block.tile.data.ComparatorData;
 public interface Comparator extends TileEntity {
 
     /**
-     * Gets the data that this {@link Comparator} is currently using.
+     * Gets a copy of the current {@link ComparatorData}.
      *
      * @return The current comparator data
      */

@@ -33,7 +33,7 @@ import org.spongepowered.api.block.tile.data.FurnaceData;
 public interface Furnace extends TileEntityCarrier {
 
     /**
-     * Gets the current {@link FurnaceData} of this furnace.
+     * Gets a copy of the current {@link FurnaceData}.
      *
      * <p>Note that as time goes on, the {@link FurnaceData} may not remain in
      * sync with the {@link Furnace} tile entity. It is advisable that a

@@ -28,8 +28,8 @@ package org.spongepowered.api.item.inventory;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
+import org.spongepowered.api.item.aspects.ItemAspect;
 import org.spongepowered.api.item.data.ItemData;
-import org.spongepowered.api.item.properties.ItemProperty;
 
 import java.util.Comparator;
 import java.util.List;
@@ -129,8 +129,8 @@ public final class ItemStackComparators {
             if (o2 == null) {
                 return -1;
             }
-            List<ItemProperty<?, ?>> properties = Lists.newArrayList(o2.getProperties());
-            for (ItemProperty<?, ?> property : o1.getProperties()) {
+            List<ItemAspect<?, ?>> properties = Lists.newArrayList(o2.getAspects());
+            for (ItemAspect<?, ?> property : o1.getAspects()) {
                 if (properties.contains(property)) {
                     properties.remove(property);
                 } else {
@@ -154,8 +154,8 @@ public final class ItemStackComparators {
             if (o2 == null) {
                 return -1;
             }
-            List<ItemData<?>> properties = Lists.newArrayList(o2.getItemData());
-            for (ItemData<?> property : o1.getItemData()) {
+            List<ItemData<?>> properties = Lists.newArrayList(o2.getManipulators());
+            for (ItemData<?> property : o1.getManipulators()) {
                 if (properties.contains(property)) {
                     properties.remove(property);
                 } else {

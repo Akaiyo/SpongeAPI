@@ -27,6 +27,7 @@ package org.spongepowered.api.block.tile.data;
 import com.google.common.base.Optional;
 import org.spongepowered.api.block.tile.TileEntity;
 import org.spongepowered.api.service.persistence.DataSerializable;
+import org.spongepowered.api.service.persistence.data.DataManipulator;
 
 /**
  * Represents data held by a {@link TileEntity}.
@@ -35,7 +36,7 @@ import org.spongepowered.api.service.persistence.DataSerializable;
  * it's data represented by {@link TileEntityData}. Required data for a {@link
  * TileEntity} will always exist, but </p>
  */
-public interface TileEntityData<E extends TileEntity, T extends TileEntityData<E, T>> extends Comparable<T>, DataSerializable {
+public interface TileEntityData<E extends TileEntity, T extends TileEntityData<E, T>> extends DataManipulator<T> {
 
     /**
      * Retrieves the tile entity that is backing this tile entity data, if a

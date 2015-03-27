@@ -51,7 +51,7 @@ public interface Jukebox extends TileEntity {
     void insertRecord(ItemStack record);
 
     /**
-     * Gets the associated {@link JukeboxData} for this {@link Jukebox}.
+     * Gets a copy of the current {@link JukeboxData}.
      *
      * @return The current associated juke box data
      */

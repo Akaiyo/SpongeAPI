@@ -45,7 +45,7 @@ public interface Beacon extends TileEntityCarrier {
     int getCompletedLevels();
 
     /**
-     * Gets the currently associated {@link BeaconData}.
+     * Gets a copy of the current {@link BeaconData}.
      *
      * @return The currently associated beacon data
      */

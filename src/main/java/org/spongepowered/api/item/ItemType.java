@@ -26,8 +26,8 @@
 package org.spongepowered.api.item;
 
 import com.google.common.base.Optional;
+import org.spongepowered.api.item.aspects.ItemAspect;
 import org.spongepowered.api.item.inventory.ItemStack;
-import org.spongepowered.api.item.properties.ItemProperty;
 import org.spongepowered.api.text.translation.Translatable;
 
 /**
@@ -54,19 +54,19 @@ public interface ItemType extends Translatable {
     int getMaxStackQuantity();
 
     /**
-     * Gets the default {@link ItemProperty} of this {@link ItemType}.
+     * Gets the default {@link ItemAspect} of this {@link ItemType}.
      *
-     * <p>While item stacks do have properties, generally, there is an
-     * intrinsic default property for many item types. However, it should be
+     * <p>While item stacks do have aspects, generally, there is an
+     * intrinsic default aspect for many item types. However, it should be
      * considered that when mods are introducing their own custom items, they
      * too could introduce different item properties based on various data on
      * the item stack. The default properties retrieved from here should merely
-     * be considered as a default, not as a definitive property.</p>
+     * be considered as a default, not as a definitive aspect.</p>
      *
-     * @param propertyClass The item property class
-     * @param <T> The type of item property
-     * @return The item property, if available
+     * @param aspectClass The item aspect class
+     * @param <T> The type of item aspect
+     * @return The item aspect, if available
      */
-    <T extends ItemProperty<?, ?>> Optional<T> getDefaultProperty(Class<T> propertyClass);
+    <T extends ItemAspect<?, ?>> Optional<T> getDefaultProperty(Class<T> aspectClass);
 
 }

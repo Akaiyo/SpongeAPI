@@ -25,7 +25,7 @@
 package org.spongepowered.api.item.data;
 
 import com.google.common.base.Optional;
-import org.spongepowered.api.item.ItemDataTransactionResult;
+import org.spongepowered.api.service.persistence.data.DataTransactionResult;
 
 import java.util.Map;
 import java.util.Set;
@@ -87,7 +87,7 @@ public interface MappedItemData<K, V, T extends MappedItemData<K, V, T>> extends
      * @return The transaction result, if the keys and their respective values
      *     were added, rejected or replaced
      */
-    ItemDataTransactionResult set(K key, V value);
+    DataTransactionResult set(K key, V value);
 
     /**
      * Sets mapped data attached to the item stack.
@@ -100,7 +100,7 @@ public interface MappedItemData<K, V, T extends MappedItemData<K, V, T>> extends
      * @return The transaction result, if the keys and their respective values
      *     were added, rejected or replaced
      */
-    ItemDataTransactionResult set(Map<K, V> mapped);
+    DataTransactionResult set(Map<K, V> mapped);
 
     /**
      * Sets mapped data attached to the item stack.
@@ -110,7 +110,7 @@ public interface MappedItemData<K, V, T extends MappedItemData<K, V, T>> extends
      * @param mapped The mapped data attached to the item stack
      * @return The transaction result, if the mapped were added rejected or replaced
      */
-    ItemDataTransactionResult set(K... mapped);
+    DataTransactionResult set(K... mapped);
 
     /**
      * Unsafely sets the key at the desired value.

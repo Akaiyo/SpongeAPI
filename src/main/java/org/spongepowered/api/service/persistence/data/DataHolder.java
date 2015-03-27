@@ -26,11 +26,15 @@
 package org.spongepowered.api.service.persistence.data;
 
 import com.google.common.base.Optional;
+import org.spongepowered.api.service.persistence.InvalidDataException;
+import org.spongepowered.api.util.Aspect;
+
+import java.util.Collection;
 
 /**
  * A data holder object allows the access of additional data on the object
  * that is not simply expressed by its basic type.
- *
+ *å
  * <p>For example, a chest block, which is of the chest type, also has
  * inventory. This inventory is considered extra data, which can
  * be accessed via {@link #getData(Class)}, provided that an implementation
@@ -39,18 +43,142 @@ import com.google.common.base.Optional;
 public interface DataHolder {
 
     /**
-     * Get an instance of the given data class for this block.
+     * Gets an instance of the given data class for this {@link DataHolder}.
      *
-     * <p>For example, if this block represents a sign,
-     * {@code getData(Sign.class)} would yield an instance of
-     * {@code Sign} to change the contents of the sign. However, if
-     * this block does not represent a sign, then an instance will not
-     * be returned.</p>
+     * <p>If there is no pre-existing data that can be represented by the given
+     * {@link DataManipulator} class, {@link Optional#absent()} is returned.
+     * </p>
      *
      * @param dataClass The data class
      * @param <T> The type of data
-     * @return An instance of the class
+     * @return An instance of the class, if not available
      */
-    <T> Optional<T> getData(Class<T> dataClass);
+    <T extends DataManipulator<T>> Optional<T> getData(Class<T> dataClass);
+
+    /**
+     * Gets or creates a new {@link DataManipulator} that can be accepted by
+     * this {@link DataHolder}. In the event that there is no data that can
+     * be represented by the given {@link DataManipulator}, a new {@link
+     * DataManipulator} object is created with default values.
+     *
+     * <p>In the event the {@link DataManipulator} can not represent any data
+     * pertaining to this {@link DataHolder}, {@link Optional#absent()} is
+     * returned.</p>
+     *
+     * @param manipulatorClass The data class
+     * @param <T> The type of data
+     * @return An instance of the class, if not available
+     */
+    <T extends DataManipulator<T>> Optional<T> getOrCreate(Class<T> manipulatorClass);
+
+    /**
+     * Checks if the given {@link DataManipulator} class is able to represent
+     * data within this {@link DataHolder}.
+     *
+     * @param manipulatorClass The data class
+     * @param <T> The type of data
+     * @return True if this {@link DataHolder} can accept the {@link
+     *    DataManipulator} object
+     */
+    <T extends DataManipulator<T>> boolean isCompatible(Class<T> manipulatorClass);
+
+    /**
+     * Offers the given {@link DataManipulator} to this {@link DataHolder}.
+     *
+     * <p>In the event that the {@link DataManipulator} contains data that
+     * would otherwise overlap existing data on this {@link DataHolder}, a
+     * default {@link DataPriority#DATA_MANIPULATOR} is used.</p>
+     *
+     * <p>If any data is rejected or existing data is replaced, the {@link
+     * DataTransactionResult} will retain the rejected and replaced data.</p>
+     *
+     * @param manipulatorData The manipulator data to offer
+     * @param <T> The type of manipulator data
+     * @return The transaction result
+     */
+    <T extends DataManipulator<T>> DataTransactionResult offer(T manipulatorData);
+
+    /**
+     * Offers the given {@link DataManipulator} to this {@link DataHolder}.
+     *
+     * <p>If any data is rejected or existing data is replaced, the {@link
+     * DataTransactionResult} will retain the rejected and replaced data.</p>
+     *
+     * @param manipulatorData The manipulator data to offer
+     * @param <T> The type of manipulator data
+     * @param priority The data priority to use
+     * @return The transaction result
+     */
+    <T extends DataManipulator<T>> DataTransactionResult offer(T manipulatorData, DataPriority priority);
+
+    /**
+     * Gets an copied collection of all known {@link DataManipulator}s
+     * belonging to this {@link DataHolder}. An individual {@link
+     * DataManipulator} can be used for creating new data to replace on this
+     * {@link DataHolder}.
+     *
+     * @return A collection of copied data manipulators belonging to this
+     *     data holder
+     */
+    Collection<? extends DataManipulator<?>> getManipulators();
+
+    /**
+     * Attempts to retrieve a specific {@link Aspect} type of this {@link
+     * DataHolder}. If the aspect is not applicable, {@link Optional#absent()}
+     * is returned.
+     *
+     * <p>{@link Aspect}s can define various immutable information about a
+     * {@link DataHolder} that is dependent on the instance of the holder.
+     * As {@link Aspect}s cannot be changed, the {@link DataHolder} can
+     * not change the information about it's own aspects either.</p>
+     *
+     * @param aspectClass The aspect class
+     * @param <T> The type of aspect
+     * @return The aspect, if available
+     */
+    <T extends Aspect<?, ?, T>> Optional<T> getAspect(Class<T> aspectClass);
+
+    /**
+     * Gets an immutable collection of all known {@link Aspect}s pertaining to
+     * this {@link DataHolder}.
+     *
+     * <p>{@link Aspect}s can not be changed such that the aspect is attached
+     * to the instance of the residing {@link DataHolder}.</p>
+     *
+     * @return An immutable collection of all known {@link Aspect}s
+     */
+    Collection<? extends Aspect<?, ?, ?>> getAspects();
+
+    /**
+     * Validates the container with known data required to set the raw data to
+     * this {@link DataHolder}. If the container is incomplete or contains
+     * invalid data, <code>false</code> is returned.
+     *
+     * <p>This validation should be checked prior to calling
+     * {@link #setRawData(DataContainer)} to avoid exceptions.</p>
+     *
+     * @param container The raw data to validate
+     * @return True if the data is valid
+     */
+    boolean validateRawData(DataContainer container);
+
+    /**
+     * Attempts to set all data of this {@link DataManipulator} according to the
+     * {@link DataContainer}'s held information. Using this to modify known
+     * {@link DataManipulator} is unsupported and if the data is invalid, an
+     * {@link InvalidDataException} is thrown.
+     *
+     * <p>This setter is used to provide setting custom data that is not
+     * represented by the Data API, including forge mods and other
+     * unknown data. Attempts at validating known {@link DataManipulator}s
+     * contained in the data container are made with the assumption that all
+     * necessary data exists.</p>
+     *
+     * @param container A container containing all raw data to set on this
+     *     data holder
+     * @throws InvalidDataException If the container is missing or has invalid
+     *     data that this holder will refuse
+     */
+    void setRawData(DataContainer container) throws InvalidDataException;
 
 }

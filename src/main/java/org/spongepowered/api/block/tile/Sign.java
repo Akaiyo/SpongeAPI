@@ -33,7 +33,7 @@ import org.spongepowered.api.block.tile.data.SignData;
 public interface Sign extends TileEntity {
 
     /**
-     * Gets the data that this {@link Sign} is currently using.
+     * Gets a copy of the current {@link SignData}.
      *
      * @return The current sign data
      */

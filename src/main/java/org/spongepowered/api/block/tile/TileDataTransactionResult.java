@@ -27,70 +27,19 @@ package org.spongepowered.api.block.tile;
 
 import com.google.common.base.Optional;
 import org.spongepowered.api.block.tile.data.TileEntityData;
+import org.spongepowered.api.service.persistence.data.DataTransactionResult;
 
 import java.util.Collection;
 
 /**
  * Represents a result of a {@link TileEntity}'s data being set.
  */
-public interface TileDataTransactionResult {
+public interface TileDataTransactionResult extends DataTransactionResult {
 
-    public enum Type {
-
-        /**
-         * The actual result of the operation is undefined, this probably
-         * indicates that something went wrong with the operation that the
-         * item data couldn't handle or didn't expect. The state of the
-         * item data is undefined.
-         */
-        UNDEFINED,
-
-        /**
-         * The item data operation succeeded.
-         */
-        SUCCESS,
-
-        /**
-         * The item data operation failed for an <em>expected</em> reason (such
-         * as the item data being incompatible with the item stack.
-         * The condition of the item data is unchanged.
-         */
-        FAILURE,
-
-        /**
-         * The item data operation failed because an <em>unexpected</em>
-         * condition occurred. The state of the item data is undefined.
-         */
-        ERROR,
-
-        /**
-         * An operation was cancelled by a third party (eg. an item data event
-         * was cancelled). The condition of the item data is unchanged.
-         */
-        CANCELLED;
-    }
-
-    /**
-     * Get the type of result.
-     *
-     * @return the type of result
-     */
-    Type getType();
-
-    /**
-     * If items were supplied to the operation, this collection will return any
-     * items which were rejected by the target item stack.
-     *
-     * @return Any item data that was rejected from the operation
-     */
+    @Override
     Optional<Collection<TileEntityData<?, ?>>> getRejectedData();
 
-    /**
-     * If the operation replaced {@link TileEntityData}, this returns a collection of
-     * the replaced {@link TileEntityData}.
-     *
-     * @return Any item data that were replaced
-     */
+    @Override
     Optional<Collection<TileEntityData<?, ?>>> getReplacedData();
 
 }

@@ -26,6 +26,8 @@
 package org.spongepowered.api.block;
 
 import com.flowpowered.math.vector.Vector3i;
+import com.google.common.base.Optional;
+import org.spongepowered.api.block.tile.TileEntity;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.service.persistence.data.DataHolder;
 import org.spongepowered.api.util.Direction;
@@ -117,9 +119,36 @@ public interface BlockLoc extends DataHolder {
     /**
      * Checks for whether the block at this position contains tile entity data.
      *
-     * @return True if the block at this position has tile entity data, false otherwise
+     * @return True if the block at this position has tile entity data, false
+     *     otherwise
      */
     boolean hasTileEntity();
+
+    /**
+     * Checks if the given {@link TileEntity} class is appropriate for the
+     * {@link TileEntity} that may reside in this {@link BlockLoc}.
+     *
+     * @param tileEntityClass The tile entity class
+     * @param <T> The type of {@link TileEntity}
+     * @return Whether there exists a tile entity of the provided class in this
+     *     location
+     */
+    <T extends TileEntity> boolean hasSpecificTileEntity(Class<T> tileEntityClass);
+
+    /**
+     * Attempts to retrieve the current {@link TileEntity} belonging to this
+     * {@link BlockLoc}.
+     *
+     * <p>A {@link TileEntity} exists only through a {@link BlockLoc} that can
+     * contain the appropriate {@link TileEntity}. If no {@link TileEntity}
+     * exists, {@link Optional#absent()} is returned. If the incorrect type of
+     * {@link TileEntity} is requested, {@link Optional#absent()} is returned.
+     * </p>
+     *
+     * @param <T> The type of tile entity
+     * @return The tile entity instance, if not available
+     */
+    <T extends TileEntity> Optional<T> getTileEntity();
 
     /**
      * Replace the block state at this position with a new state.

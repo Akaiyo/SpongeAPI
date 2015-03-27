@@ -32,7 +32,7 @@ import org.spongepowered.api.block.tile.data.FlowerPotData;
 public interface FlowerPot extends TileEntity {
 
     /**
-     * Gets the data that this {@link FlowerPot} is currently using.
+     * Gets a copy of the current {@link FlowerPotData}.
      *
      * @return The current flower pot data
      */

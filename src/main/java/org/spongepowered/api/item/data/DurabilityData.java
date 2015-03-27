@@ -24,6 +24,8 @@
  */
 package org.spongepowered.api.item.data;
 
+import org.spongepowered.api.item.aspects.UseLimitAspect;
+
 /**
  * Represents an item that has limited number of uses.
  *
@@ -31,7 +33,7 @@ package org.spongepowered.api.item.data;
  * durability reaches the maximum. Examples of this include pickaxes,
  * axes, swords, and shovels. It is recommended to retrieve the maximum
  * durability limit from the
- * {@link org.spongepowered.api.item.properties.UseLimitProperty}.</p>
+ * {@link UseLimitAspect}.</p>
  */
 public interface DurabilityData extends ItemData<DurabilityData> {
 

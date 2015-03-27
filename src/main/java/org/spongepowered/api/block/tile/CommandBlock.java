@@ -38,7 +38,7 @@ public interface CommandBlock extends TileEntity, CommandBlockSource {
     void execute();
 
     /**
-     * Gets the data that this {@link CommandBlock} is currently using.
+     * Gets a copy of the current {@link CommandData}.
      *
      * @return The current command data
      */

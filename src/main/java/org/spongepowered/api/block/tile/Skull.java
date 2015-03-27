@@ -33,7 +33,7 @@ import org.spongepowered.api.block.tile.data.SkullData;
 public interface Skull extends TileEntity {
 
     /**
-     * Gets the data that this {@link Skull} is currently using.
+     * Gets a copy of the current {@link SkullData}.
      *
      * @return The current skull data
      */

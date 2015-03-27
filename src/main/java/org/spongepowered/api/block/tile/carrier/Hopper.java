@@ -43,7 +43,7 @@ public interface Hopper extends TileEntityCarrier {
     void transferItem();
 
     /**
-     * Gets the current {@link HopperData} of this hopper.
+     * Gets a copy of the current {@link HopperData}.
      *
      * <p>Note that as time goes on, the {@link HopperData} may not remain in
      * sync with the {@link Hopper} tile entity. It is advisable that a

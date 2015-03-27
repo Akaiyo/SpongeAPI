@@ -24,19 +24,19 @@
  */
 package org.spongepowered.api.item.data;
 
+import org.spongepowered.api.item.aspects.ItemAspect;
 import org.spongepowered.api.item.inventory.ItemStack;
-import org.spongepowered.api.item.properties.ItemProperty;
-import org.spongepowered.api.service.persistence.DataSerializable;
+import org.spongepowered.api.service.persistence.data.DataManipulator;
 
 /**
  * Represents arbitrary mutable data on an {@link ItemStack}.
  *
  * <p>This is part of a larger item system composed of {@link ItemData} and
- * {@link ItemProperty}. An {@link ItemStack} may have multiple of either
+ * {@link ItemAspect}. An {@link ItemStack} may have multiple of either
  * or none at all.</p>
  *
  * @param <T> The extending type of {@link ItemData} for comparisons
  */
-public interface ItemData<T extends ItemData<T>> extends Comparable<T>, DataSerializable {
+public interface ItemData<T extends ItemData<T>> extends DataManipulator<T> {
 
 }

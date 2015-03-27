@@ -28,7 +28,7 @@ import com.google.common.base.Optional;
 import org.spongepowered.api.item.inventory.Inventory;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.item.inventory.Slot;
-import org.spongepowered.api.item.inventory.properties.SlotPos;
+import org.spongepowered.api.item.inventory.aspects.SlotPos;
 import org.spongepowered.api.item.inventory.transaction.InventoryOperationResult;
 
 /**

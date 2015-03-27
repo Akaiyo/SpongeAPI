@@ -29,7 +29,7 @@ import org.spongepowered.api.entity.ArmorEquipable;
 import org.spongepowered.api.item.inventory.Inventory;
 import org.spongepowered.api.item.inventory.ItemStack;
 import org.spongepowered.api.item.inventory.Slot;
-import org.spongepowered.api.item.inventory.properties.EquipmentSlotType;
+import org.spongepowered.api.item.inventory.aspects.EquipmentSlotType;
 import org.spongepowered.api.item.inventory.transaction.InventoryOperationResult;
 import org.spongepowered.api.item.inventory.types.CarriedInventory;
 import org.spongepowered.api.item.inventory.types.OrderedInventory;
